@@ -46,7 +46,7 @@ class UserTest < ActiveSupport::TestCase
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
     assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
-    end
+    
   end
 
     test "email addresses should be unique" do
@@ -66,4 +66,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+ test "aunthenticated? should return false for a user with nil digest" do
+  assert_not @user.aunthenticated?('')
+  end
+end
 end
