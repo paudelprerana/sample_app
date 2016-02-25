@@ -2,6 +2,8 @@ require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
   
+   def setup
+  @user = users("michael")
 
    test " login with invalid information" do
      get login_path
@@ -48,6 +50,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", user_path(@user), count: 0
    
    end
+
   test "login with remembering" do
     log_in_as(@user, remember_me: '1')
     assert_not_nil cookies['remember_token']
@@ -58,4 +61,5 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_nil cookies['remember_token']
   end
 
+end
 end
